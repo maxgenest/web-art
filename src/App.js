@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Canvas from './components/Canvas'
+import Fireworks from './components/canvas/Fireworks';
 
 function App() {
   const headerRef = useRef(null);
@@ -12,28 +12,23 @@ function App() {
     }
   }, [headerRef])
 
-  const draw = (ctx, frameCount) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
-    ctx.fillStyle = '#000000'
-    ctx.beginPath()
-    ctx.arc(50, 100, 20 * Math.sin(frameCount * 0.01) ** 2, 0, 2 * Math.PI)
-    ctx.fill()
-  }
-
-  const options = {}
-
   return (
-    <div>
+    <Wrapper>
       <div ref={headerRef} id='header'>
         <Title>Web Art by Maxime</Title>
       </div>
-      <Canvas draw={draw} options={options} height={canvasHeight} width={window.innerWidth} />
-    </div>
+      <Fireworks canvasHeight={canvasHeight} canvasWidth={window.innerWidth} />
+    </Wrapper>
   );
 }
 
+const Wrapper = styled.div`
+  background-color: #000;
+`
 const Title = styled.h1`
   margin: 0;
+  padding: 10px;
+  color: #fff;
 `
 
 export default App;
