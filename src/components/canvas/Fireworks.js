@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Canvas from '../Canvas';
 
 const Fireworks = ({ canvasHeight, canvasWidth}) => {
@@ -8,21 +8,20 @@ const Fireworks = ({ canvasHeight, canvasWidth}) => {
     const { canvas } = ctx;
     const { width, height } = canvas;
 
+    let yPos = Math.max(position.y - Math.sqrt(frameCount * 5000), 50)
+
     ctx.clearRect(0, 0, width, height)
     ctx.fillStyle = '#fff'
     ctx.beginPath()
-    ctx.arc(position.x / 2, position.y, 20 * Math.sin(frameCount * 0.01) ** 2, 0, 2 * Math.PI)
+    ctx.arc(position.x, yPos, 5, 0, 2 * Math.PI)
     ctx.fill()
   }
 
   const options = {}
 
-  useEffect(() => {
-    setPosition({x: canvasWidth, y: canvasHeight})
-  }, [canvasHeight, canvasWidth])
-
-  const onClick = () => {
-    setPosition(prevState => ({x: prevState.x, y: prevState.y - 10}));
+  const onClick = (e) => {
+    console.log('e', e);
+    setPosition(({x: e.clientX, y: e.clientY}));
   }
 
   return (

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import useCanvas from '../hooks/useCanvas'
 
 const Canvas = ({ draw, options, ...rest }) => {
-  const { context, ...moreConfig } = options
+  const { context } = options
   const canvasRef = useCanvas(draw, {context})
 
   return <canvas ref={canvasRef} {...rest}/>
